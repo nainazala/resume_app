@@ -46,7 +46,7 @@ class _HomePageState extends State<ResumeEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Create Resume")),
+        appBar: AppBar(title: Text("Edit Resume")),
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(10),
@@ -73,16 +73,21 @@ class _HomePageState extends State<ResumeEditPage> {
                       ),
                     )
                     : Center(
-                      child: CircleAvatar(
-                          child: ClipOval(
-                              child: Image.file(
-                            image!,
-                            fit: BoxFit.cover,
-                            width: 200,
-                            height: 120,
-                          )),
-                          radius: 60,
-                        ),
+                      child: InkWell(
+                        onTap: (){
+                          pickImage();
+                        },
+                        child: CircleAvatar(
+                            child: ClipOval(
+                                child: Image.file(
+                              image!,
+                              fit: BoxFit.cover,
+                              width: 200,
+                              height: 120,
+                            )),
+                            radius: 60,
+                          ),
+                      ),
                     ),
                 Text("Name",
                     style: TextStyle(

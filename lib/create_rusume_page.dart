@@ -50,7 +50,6 @@ class _HomePageState extends State<ResumeCretePage> {
                       child: Column(
                         children: [
                           Container(
-                            
                             child: Image.asset("images/ic_profile.jpg", width: 200,
                               height: 120,),
 
@@ -64,16 +63,21 @@ class _HomePageState extends State<ResumeCretePage> {
                       ),
                     )
                     : Center(
-                      child: CircleAvatar(
-                          child: ClipOval(
-                              child: Image.file(
-                            image!,
-                            fit: BoxFit.cover,
-                            width: 200,
-                            height: 120,
-                          )),
-                          radius: 60,
-                        ),
+                      child: InkWell(
+                        onTap: (){
+                          pickImage();
+                        },
+                        child: CircleAvatar(
+                            child: ClipOval(
+                                child: Image.file(
+                              image!,
+                              fit: BoxFit.cover,
+                              width: 200,
+                              height: 120,
+                            )),
+                            radius: 60,
+                          ),
+                      ),
                     ),
                 Text("Name",
                     style: TextStyle(
