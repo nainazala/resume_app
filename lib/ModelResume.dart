@@ -23,6 +23,7 @@ class ModelResume{
       email:json['email']!=null? json['email'].toString():'',
       address: json['address']!=null?json['address'].toString():'',
       phone: json['phone']!=null?json['phone'].toString():'',
+      photo: json['photo']!=null?json['photo'].toString():'',
       education: json['education']!=null?json['education']:true,
     );
   }

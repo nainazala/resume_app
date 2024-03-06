@@ -12,14 +12,17 @@ import 'DatabaseHelper.dart';
 import 'ModelClass.dart';
 import 'ModelResume.dart';
 
-class ResumeCretePage extends StatefulWidget {
-  const ResumeCretePage({super.key});
+class ResumeEditPage extends StatefulWidget {
+  ModelResume model;
+
+  ResumeEditPage({required this.model});
+
 
   @override
-  State<ResumeCretePage> createState() => _HomePageState();
+  State<ResumeEditPage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<ResumeCretePage> {
+class _HomePageState extends State<ResumeEditPage> {
   TextEditingController txtname = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPhone = TextEditingController();
@@ -31,6 +34,12 @@ class _HomePageState extends State<ResumeCretePage> {
   @override
   void initState() {
     // TODO: implement initState
+    txtname.text = widget.model.name.toString();
+    txtEmail.text = widget.model.email.toString();
+    txtPhone.text = widget.model.phone.toString();
+    txtAddress.text = widget.model.address.toString();
+    txtEducation.text = widget.model.education.toString();
+    image = File(widget.model.photo.toString());
     super.initState();
   }
 
@@ -187,7 +196,7 @@ class _HomePageState extends State<ResumeCretePage> {
                               education: txtEducation.text,
                               phone: txtPhone.text,
                               photo:  image!.path.toString());
-                          _Insertquery(model);
+                          _Editquery(model,widget.model.id);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -196,7 +205,7 @@ class _HomePageState extends State<ResumeCretePage> {
                                     )),
                           );
                         },
-                        child: Text("Create Resume")))
+                        child: Text("Edit Resume")))
               ],
             ),
           ),
@@ -214,18 +223,14 @@ class _HomePageState extends State<ResumeCretePage> {
     }
   }
 
-  _Insertquery(ModelClass modelClass) async {
+  _Editquery(ModelClass modelClass, int? id) async {
     // get a reference to the database
     Database? db = await DatabaseHelper.instance.database;
     DatabaseHelper databaseHelper = DatabaseHelper.instance;
 
-    databaseHelper.insert(modelClass);
+    databaseHelper.update(modelClass,id);
     // get all rows
     List<Map> result = await db!.query(DatabaseHelper.table);
-    // print the results
-    // result.forEach((row) => print(row));
-    // openseaController.fetchedList.value =
-    //     result.map((f) => ModelTODO.fromJson(f)).toList();
-    // openseaController.isloading.value = false;
+
   }
 }
